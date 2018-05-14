@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class ShoppingList extends React.Component {
+class ShoppingListForm extends React.Component {
   render() {
     return <div>container</div>
   }
 }
 
-ShoppingList.propTypes = {}
+ShoppingListForm.propTypes = {}
 
-export default ShoppingList
+export default ShoppingListForm
