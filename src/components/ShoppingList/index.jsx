@@ -1,15 +1,36 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import ShoppingListItem from 'components/ShoppingListItem'
 import ShoppingListForm from 'components/ShoppingListForm'
+import firebase from 'config/firebase'
 
 class ShoppingList extends React.PureComponent {
-  renderItem = (item, index) => (
-    <ShoppingListItem key={`item-${index}`} item={item} />
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      shoppingItems: {}
+    }
+  }
+
+  componentDidMount() {
+    firebase.on('value', (snap) => {
+      console.log('shoppingItems', snap.val())
+      this.setState({ shoppingItems: snap.val() })
+    })
+  }
+
+  componentWillUnmount() {
+    firebase.off('value', this.firebaseCallback)
+  }
+
+  renderItem = ([key, item]) => (
+    <ShoppingListItem key={`item-${key}`} item={item} />
   )
 
   render() {
-    const renderedShoppingItems = this.props.shoppingItems.map(this.renderItem)
+    const renderedShoppingItems = Object.entries(this.state.shoppingItems).map(
+      this.renderItem
+    )
 
     return (
       <div>
@@ -20,8 +41,6 @@ class ShoppingList extends React.PureComponent {
   }
 }
 
-ShoppingList.propTypes = {
-  shoppingItems: PropTypes.array.isRequired
-}
+ShoppingList.propTypes = {}
 
 export default ShoppingList

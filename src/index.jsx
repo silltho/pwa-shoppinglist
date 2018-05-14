@@ -1,9 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 /* import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from 'services/reducers' */
-import App from "./containers/App/index.jsx";
+import reducer from 'config/reducers' */
+import App from './containers/App/index.jsx'
 
 /* const store = createStore(
   reducer,
@@ -11,9 +11,9 @@ import App from "./containers/App/index.jsx";
   window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line no-underscore-dangle
 ) */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App />,
-    document.body.appendChild(document.createElement("div"))
-  );
-});
+    document.body.appendChild(document.createElement('div'))
+  )
+})

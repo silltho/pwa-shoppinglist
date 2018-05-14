@@ -11,4 +11,7 @@ const config = {
   messagingSenderId: '<YOUR-MESSAGING-SENDER-ID>'
 }
 
-export default firebase.initializeApp(config)
+export default firebase
+  .initializeApp(config)
+  .database()
+  .ref('/shoppingList')
