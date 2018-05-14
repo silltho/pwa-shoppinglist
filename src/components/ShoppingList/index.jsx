@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ShoppingListItem from 'components/ShoppingListItem'
+import ShoppingListForm from 'components/ShoppingListForm'
 
 class ShoppingList extends React.PureComponent {
   renderItem = (item, index) => (
@@ -10,7 +11,12 @@ class ShoppingList extends React.PureComponent {
   render() {
     const renderedShoppingItems = this.props.shoppingItems.map(this.renderItem)
 
-    return <ul>{renderedShoppingItems}</ul>
+    return (
+      <div>
+        <ShoppingListForm />
+        <ol>{renderedShoppingItems}</ol>
+      </div>
+    )
   }
 }
 

@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 
 class ShoppingListForm extends React.Component {
   render() {
-    return <div>container</div>
+    return (
+      <form>
+        <input type="text" />
+        <input type="submit" value="+" />
+      </form>
+    )
   }
 }
 
