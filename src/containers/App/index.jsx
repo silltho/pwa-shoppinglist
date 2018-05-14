@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ShoppingList from 'components/ShoppingList/index.jsx'
+import ShoppingList from 'components/ShoppingList'
 
 const defaultProps = {
   shoppingItems: [
@@ -24,6 +24,12 @@ const defaultProps = {
 }
 
 class App extends React.Component {
+  renderItem = (item) => (
+    <li>
+      {item.description}:{item.done}
+    </li>
+  )
+
   render() {
     return <ShoppingList {...defaultProps} />
   }
