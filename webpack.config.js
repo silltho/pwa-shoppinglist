@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  mode: 'development',
   module: {
     rules: [
       {
@@ -53,6 +54,6 @@ module.exports = {
     })
   ],
   resolve: {
-    modules: [path.resolve(__dirname, './src'), 'node_modules']
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   }
 }
