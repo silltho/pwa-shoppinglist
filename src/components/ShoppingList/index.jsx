@@ -24,7 +24,7 @@ class ShoppingList extends React.PureComponent {
   }
 
   renderItem = ([key, item]) => (
-    <ShoppingListItem key={`item-${key}`} item={item} />
+    <ShoppingListItem key={`item-${key}`} itemKey={key} item={item} />
   )
 
   render() {
