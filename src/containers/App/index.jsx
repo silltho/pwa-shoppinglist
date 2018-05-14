@@ -5,19 +5,19 @@ import ShoppingList from 'components/ShoppingList'
 const defaultProps = {
   shoppingItems: [
     {
-      desription: 'article1',
+      description: 'article1',
       done: false
     },
     {
-      desription: 'article2',
+      description: 'article2',
       done: false
     },
     {
-      desription: 'article3',
+      description: 'article3',
       done: false
     },
     {
-      desription: 'article4',
+      description: 'article4',
       done: false
     }
   ]
