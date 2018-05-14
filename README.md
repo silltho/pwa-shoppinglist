@@ -3,7 +3,14 @@
 Thomas siller  
 Patrick Obermüller  
 
-**Task**  
+#### Development
+**Install**
+``npm install``
+
+**Run**
+``npm run dev``
+
+#### Assignment
 * Create a Shopping list PWA  
 * Auth optional  
 * It should trigger the Add to home screen event  
