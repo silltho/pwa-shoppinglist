@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 import ShoppingListItem from 'components/ShoppingListItem'
 
 class ShoppingList extends React.PureComponent {
+  renderItem = (item, index) => (
+    <ShoppingListItem key={`item-${index}`} item={item} />
+  )
+
   render() {
     const renderedShoppingItems = this.props.shoppingItems.map(this.renderItem)
 

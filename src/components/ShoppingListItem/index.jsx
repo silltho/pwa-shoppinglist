@@ -3,10 +3,19 @@ import PropTypes from 'prop-types'
 
 class ShoppingListItem extends React.Component {
   render() {
-    return <div>container</div>
+    const { item } = this.props
+
+    return (
+      <li>
+        <input type="checkbox" checked={item.done} readOnly />
+        <span>{item.description}</span>
+      </li>
+    )
   }
 }
 
-ShoppingListItem.propTypes = {}
+ShoppingListItem.propTypes = {
+  item: PropTypes.object.isRequired
+}
 
 export default ShoppingListItem

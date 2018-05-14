@@ -24,12 +24,6 @@ const defaultProps = {
 }
 
 class App extends React.Component {
-  renderItem = (item) => (
-    <li>
-      {item.description}:{item.done}
-    </li>
-  )
-
   render() {
     return <ShoppingList {...defaultProps} />
   }
