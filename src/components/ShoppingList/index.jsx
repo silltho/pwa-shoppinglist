@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ShoppingListItem from 'components/ShoppingListItem'
+import ShoppingListItem from 'src/components/ShoppingListItem'
 
 class ShoppingList extends React.Component {
-  renderItem = item => (
+  renderItem = (item) => (
     <li>
       {item.description}:{item.done}
     </li>

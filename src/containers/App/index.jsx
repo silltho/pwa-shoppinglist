@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ShoppingList from 'components/ShoppingList'
+import ShoppingList from 'components/ShoppingList/index.jsx'
 
 const defaultProps = {
   shoppingItems: [
