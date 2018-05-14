@@ -14,11 +14,11 @@ const defaultProps = {
     },
     {
       description: 'article3',
-      done: false
+      done: true
     },
     {
       description: 'article4',
-      done: false
+      done: true
     }
   ]
 }
