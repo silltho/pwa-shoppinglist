@@ -1,12 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ShoppingListItem from 'components/ShoppingListItem'
 
 class ShoppingList extends React.Component {
+  renderItem = item => (
+    <li>
+      {item.description}:{item.done}
+    </li>
+  )
+
   render() {
-    return <div>container</div>
+    const renderedShoppingItems = this.props.shoppingItems.map(this.renderItem)
+
+    return <ul>{renderedShoppingItems}</ul>
   }
 }
 
-ShoppingList.propTypes = {}
+ShoppingList.propTypes = {
+  shoppingItems: PropTypes.array.isRequired
+}
 
 export default ShoppingList
