@@ -1,27 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 import firebase from 'config/firebase'
 
 class ShoppingListItem extends React.Component {
-  onChange = (e) => {
+  toggleDone = () => {
     firebase.child(this.props.itemKey).update({
       description: this.props.item.description,
-      done: e.target.checked
+      done: !this.props.item.done
     })
+  }
+
+  removeItem = () => {
+    firebase.child(this.props.itemKey).remove()
   }
 
   render() {
     const { item } = this.props
 
+    const inputName = `input-${this.props.itemKey}`
+
     return (
       <li>
         <input
+          id={inputName}
           type="checkbox"
-          checked={item.done}
           readOnly
-          onChange={this.onChange}
+          checked={item.done}
+          onClick={this.toggleDone}
         />
-        <span>{item.description}</span>
+        <label htmlFor={inputName}>{item.description}</label>
+        <FontAwesome name="trash" onClick={this.removeItem} />
       </li>
     )
   }
