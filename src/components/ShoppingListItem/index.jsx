@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import firebase from 'config/firebase'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import ListItemText from '@material-ui/core/ListItemText'
+import Checkbox from '@material-ui/core/Checkbox'
+import IconButton from '@material-ui/core/IconButton'
 
 class ShoppingListItem extends React.Component {
   toggleDone = () => {
@@ -18,20 +23,16 @@ class ShoppingListItem extends React.Component {
   render() {
     const { item } = this.props
 
-    const inputName = `input-${this.props.itemKey}`
-
     return (
-      <li>
-        <input
-          id={inputName}
-          type="checkbox"
-          readOnly
-          checked={item.done}
-          onClick={this.toggleDone}
-        />
-        <label htmlFor={inputName}>{item.description}</label>
-        <FontAwesome name="trash" onClick={this.removeItem} />
-      </li>
+      <ListItem role={undefined} dense button onClick={this.toggleDone}>
+        <Checkbox checked={item.done} tabIndex={-1} disableRipple />
+        <ListItemText primary={item.description} />
+        <ListItemSecondaryAction>
+          <IconButton aria-label="Remove">
+            <FontAwesome name="trash" onClick={this.removeItem} />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
     )
   }
 }

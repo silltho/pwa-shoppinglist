@@ -1,5 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
 import firebase from 'config/firebase'
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import Grid from '@material-ui/core/Grid'
+import FontAwesome from 'react-fontawesome'
+
+const Wrapper = styled(Grid)`
+  margin-top: 1rem !important;
+`
 
 class ShoppingListForm extends React.Component {
   constructor(props) {
@@ -27,14 +36,22 @@ class ShoppingListForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <input
-          type="text"
-          onChange={this.onInputChange}
-          value={this.state.newItemDesc}
-        />
-        <input type="submit" value="+" />
-      </form>
+      <Wrapper container spacing={8} alignItems="baseline" justify="center">
+        <Grid item xs={10}>
+          <TextField
+            id="description"
+            label="Description"
+            onChange={this.onInputChange}
+            value={this.state.newItemDesc}
+            fullWidth
+          />
+        </Grid>
+        <Grid container item xs={2} justify="flex-end">
+          <IconButton aria-label="Add" onClick={this.onFormSubmit}>
+            <FontAwesome name="plus" />
+          </IconButton>
+        </Grid>
+      </Wrapper>
     )
   }
 }

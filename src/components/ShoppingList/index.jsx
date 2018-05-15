@@ -2,6 +2,8 @@ import React from 'react'
 import ShoppingListItem from 'components/ShoppingListItem'
 import ShoppingListForm from 'components/ShoppingListForm'
 import firebase from 'config/firebase'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
 
 class ShoppingList extends React.PureComponent {
   constructor(props) {
@@ -35,7 +37,8 @@ class ShoppingList extends React.PureComponent {
     return (
       <div>
         <ShoppingListForm />
-        <ol>{renderedShoppingItems}</ol>
+        <Divider />
+        <List>{renderedShoppingItems}</List>
       </div>
     )
   }
