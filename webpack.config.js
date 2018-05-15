@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+const { InjectManifest } = require('workbox-webpack-plugin')
 
 const srcPath = path.resolve(__dirname, 'src')
 const distPath = path.resolve(__dirname, 'dist')
@@ -21,6 +21,7 @@ const webpackPwaManifestImpl = new WebpackPwaManifest({
   orientation: 'portrait',
   scope: '/',
   start_url: '/',
+  gcm_sender_id: '332598307602',
   icons: [
     {
       src: iconPath,
@@ -28,8 +29,9 @@ const webpackPwaManifestImpl = new WebpackPwaManifest({
     }
   ]
 })
-const serviceWorkerWebpackPluginImpl = new ServiceWorkerWebpackPlugin({
-  entry: swPath
+const workboxPluginImpl = new InjectManifest({
+  swSrc: swPath,
+  swDest: 'sw.js'
 })
 
 module.exports = {
@@ -65,9 +67,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    htmlWebpackPluginImpl,
-    webpackPwaManifestImpl,
-    serviceWorkerWebpackPluginImpl
-  ]
+  plugins: [htmlWebpackPluginImpl, webpackPwaManifestImpl, workboxPluginImpl]
 }
