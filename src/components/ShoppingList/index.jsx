@@ -15,8 +15,7 @@ class ShoppingList extends React.PureComponent {
   }
 
   componentDidMount() {
-    firebase.on('value', (snap) => {
-      console.log('shoppingItems', snap.val())
+    this.firebaseCallback = firebase.on('value', (snap) => {
       this.setState({ shoppingItems: snap.val() })
     })
   }
