@@ -1,11 +1,18 @@
+# Jebtrains
 .idea
 
+# Mac
 .DS_Store
 
+# Dep locks
 package-lock.json
 
+# Dependencies
 node_modules
 
+# Build directory
 dist
 
-/src/firebase.js
+# Firebase Auth Config
+firebase.js
+
