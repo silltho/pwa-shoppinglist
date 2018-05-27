@@ -15,6 +15,13 @@ if ('serviceWorker' in navigator) {
   })
 }
 
+if ('PushManager' in window) {
+  // Web Push is supported, update the UI
+  console.log('Web Push notifications are supported!')
+} else {
+  console.log('Well .. IE? ... ?  ')
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App />,
