@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 import FontAwesome from 'react-fontawesome'
+import ShoppingIcon from 'assets/icon.png'
 
 const Wrapper = styled(Grid)`
   margin-top: 1rem !important;
@@ -31,6 +32,21 @@ class ShoppingListForm extends React.Component {
       description: this.state.newItemDesc,
       done: false
     })
+
+    navigator.serviceWorker.getRegistration().then((reg) => {
+      const options = {
+        body: 'New Item Added',
+        icon: 'assets/icon.png',
+        vibrate: [100, 50, 100],
+        data: {
+          description: this.state.newItemDesc,
+          done: false
+        }
+      }
+
+      reg.showNotification('ITEM ADDED', options)
+    })
+
     this.setState({ newItemDesc: '' })
   }
 

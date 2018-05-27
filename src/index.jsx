@@ -4,6 +4,14 @@ import App from './containers/App/index.jsx'
 
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('SW and PushAPI supported!')
+
+  const PUBLIC_VAPID_KEY =
+    'BLgIK3YP-tmDz0DinlvZlzUGMeXCS0gJ7X2nkv5jjqSCesb0gR7KWGsjpkNYi8vlDpV8HFFC6xNCQeJJptWUubs'
+
+  Notification.requestPermission((status) => {
+    console.log('Notification permission status:', status)
+  })
+
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')

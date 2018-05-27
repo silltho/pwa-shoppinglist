@@ -16,3 +16,5 @@ dist
 # Firebase Auth Config
 firebase.js
 
+# Ignore vapid.keys
+vapid.keys
