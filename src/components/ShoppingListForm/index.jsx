@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 import FontAwesome from 'react-fontawesome'
+import webpush from 'web-push'
+import VAPID_KEYS from 'config/vapid'
 
 const Wrapper = styled(Grid)`
   margin-top: 1rem !important;
@@ -23,6 +25,26 @@ class ShoppingListForm extends React.Component {
     this.setState({
       newItemDesc: e.target.value
     })
+  }
+
+  pushNofication = () => {
+    webpush.setGCMAPIKey(332598307602)
+    webpush.setVapidDetails(
+      'mailto:pobermueller.mmt-b2015@fh-salzburg.ac.at',
+      VAPID_KEYS.keys.p256dh,
+      VAPID_KEYS.keys.auth
+    )
+
+    // This is the same output of calling JSON.stringify on a PushSubscription
+    const pushSubscription = {
+      endpoint: 'https://fcm.googleapis.com/fcm/send/',
+      keys: {
+        auth: VAPID_KEYS.keys.auth,
+        p256dh: VAPID_KEYS.keys.p256dh
+      }
+    }
+
+    webpush.sendNotification(pushSubscription, 'Your Push Payload Text')
   }
 
   onFormSubmit = (e) => {
