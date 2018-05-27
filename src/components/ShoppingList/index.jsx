@@ -4,6 +4,7 @@ import ShoppingListForm from 'components/ShoppingListForm'
 import firebase from 'config/firebase'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
+import Icon from 'assets/icon.png'
 
 class ShoppingList extends React.PureComponent {
   constructor(props) {
@@ -17,11 +18,29 @@ class ShoppingList extends React.PureComponent {
   componentDidMount() {
     this.firebaseCallback = firebase.on('value', (snap) => {
       this.setState({ shoppingItems: snap.val() })
+      this.displayNotification(snap.val().description)
     })
   }
 
   componentWillUnmount() {
     firebase.off('value', this.firebaseCallback)
+  }
+
+  displayNotification = () => {
+    if (Notification.permission === 'granted') {
+      navigator.serviceWorker.getRegistration().then((reg) => {
+        const options = {
+          body: `Website ${window.location.href}`,
+          icon: Icon,
+          vibrate: [100, 50, 100],
+          data: {
+            dateOfArrival: Date.now(),
+            primaryKey: 1
+          }
+        }
+        reg.showNotification('New item Added to ShoppingList.', options)
+      })
+    }
   }
 
   renderItem = ([key, item]) => (

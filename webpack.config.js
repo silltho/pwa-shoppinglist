@@ -12,6 +12,7 @@ const htmlWebpackPluginImpl = new HtmlWebPackPlugin({
   template: './src/index.html',
   filename: './index.html'
 })
+
 const webpackPwaManifestImpl = new WebpackPwaManifest({
   name: 'PWA-ShoppingList',
   short_name: 'ShoppingList',
@@ -29,6 +30,7 @@ const webpackPwaManifestImpl = new WebpackPwaManifest({
     }
   ]
 })
+
 const workboxPluginImpl = new InjectManifest({
   swSrc: swPath,
   swDest: 'sw.js'
@@ -62,6 +64,18 @@ module.exports = {
         use: [
           {
             loader: 'html-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8000, // Convert images < 8kb to base64 strings
+              name: 'images/[hash]-[name].[ext]'
+            }
           }
         ]
       }
