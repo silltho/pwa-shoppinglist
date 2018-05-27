@@ -12,6 +12,12 @@ Patrick Obermüller
 **Run**
 `npm run dev`
 
+**Build**
+`npm run build`
+
+**Deploy**
+`firebase deploy`
+
 #### Assignment
 
 * Create a Shopping list PWA
