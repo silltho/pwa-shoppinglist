@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './containers/App/index.jsx'
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('SW and PushAPI supported!')
+
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')
@@ -13,13 +15,8 @@ if ('serviceWorker' in navigator) {
         console.log('SW registration failed: ', registrationError)
       })
   })
-}
-
-if ('PushManager' in window) {
-  // Web Push is supported, update the UI
-  console.log('Web Push notifications are supported!')
 } else {
-  console.log('Well .. IE? ... ?  ')
+  console.warn('Well, IE? Push not Supported')
 }
 
 document.addEventListener('DOMContentLoaded', () => {
