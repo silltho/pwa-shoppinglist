@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const { InjectManifest } = require('workbox-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const srcPath = path.resolve(__dirname, 'src')
 const distPath = path.resolve(__dirname, 'dist')
@@ -81,5 +82,15 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlWebpackPluginImpl, webpackPwaManifestImpl, workboxPluginImpl]
+  plugins: [
+    htmlWebpackPluginImpl,
+    webpackPwaManifestImpl,
+    workboxPluginImpl,
+    new CopyWebpackPlugin([
+      {
+        from: './firebase-messaging-sw.js',
+        to: distPath
+      }
+    ])
+  ]
 }
