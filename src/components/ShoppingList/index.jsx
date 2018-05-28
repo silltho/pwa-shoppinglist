@@ -1,7 +1,7 @@
 import React from 'react'
 import ShoppingListItem from 'components/ShoppingListItem'
 import ShoppingListForm from 'components/ShoppingListForm'
-import firebase from 'config/firebase'
+import { database } from 'config/firebase'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 
@@ -15,13 +15,13 @@ class ShoppingList extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.firebaseCallback = firebase.on('value', (snap) => {
+    this.firebaseCallback = database.on('value', (snap) => {
       this.setState({ shoppingItems: snap.val() })
     })
   }
 
   componentWillUnmount() {
-    firebase.off('value', this.firebaseCallback)
+    database.off('value', this.firebaseCallback)
   }
 
   renderItem = ([key, item]) => (

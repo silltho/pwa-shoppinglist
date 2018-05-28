@@ -22,7 +22,7 @@ const webpackPwaManifestImpl = new WebpackPwaManifest({
   orientation: 'portrait',
   scope: '/',
   start_url: '/',
-  gcm_sender_id: '332598307602',
+  gcm_sender_id: '103953800507',
   icons: [
     {
       src: iconPath,

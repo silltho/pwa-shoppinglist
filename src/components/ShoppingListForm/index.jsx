@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import firebase from 'config/firebase'
+import { database } from 'config/firebase'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 import FontAwesome from 'react-fontawesome'
-import webpush from 'web-push'
-import VAPID_KEYS from 'config/vapid'
+//import webpush from 'web-push'
+//import VAPID_KEYS from 'config/vapid'
 
 const Wrapper = styled(Grid)`
   margin-top: 1rem !important;
@@ -27,7 +27,7 @@ class ShoppingListForm extends React.Component {
     })
   }
 
-  pushNofication = () => {
+  /*pushNofication = () => {
     webpush.setGCMAPIKey(332598307602)
     webpush.setVapidDetails(
       'mailto:pobermueller.mmt-b2015@fh-salzburg.ac.at',
@@ -45,11 +45,11 @@ class ShoppingListForm extends React.Component {
     }
 
     webpush.sendNotification(pushSubscription, 'Your Push Payload Text')
-  }
+  }*/
 
   onFormSubmit = (e) => {
     e.preventDefault()
-    firebase.push({
+    database.push({
       description: this.state.newItemDesc,
       done: false
     })

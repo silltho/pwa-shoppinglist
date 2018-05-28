@@ -8,9 +8,9 @@ import VAPID_KEYS from 'config/vapid'
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   console.log('SW and PushAPI supported!')
 
-  Notification.requestPermission((status) => {
+  /*Notification.requestPermission((status) => {
     console.log('Notification permission status:', status)
-  })
+  })*/
 
   window.addEventListener('load', () => {
     navigator.serviceWorker
@@ -18,13 +18,13 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
       .then((registration) => {
         console.log('SW registered: ', registration)
 
-        const vapidPublicKey = VAPID_KEYS.keys.p256dh
+        /*const vapidPublicKey = VAPID_KEYS.keys.p256dh
         const convertedVapidKey = urlBase64ToUint8Array(vapidPublicKey)
 
         registration.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: convertedVapidKey
-        })
+        })*/
       })
       .catch((registrationError) => {
         console.log('SW registration failed: ', registrationError)
