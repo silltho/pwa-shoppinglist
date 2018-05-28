@@ -25,3 +25,7 @@ Patrick Obermüller
 * It should trigger the Add to home screen event
 * Users should receive notifications on list change
 * It should work offline
+
+#### Production
+
+https://shoppinglist-ba133.firebaseapp.com/
