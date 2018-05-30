@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import firebase from 'config/firebase'
+import { displayNotification } from 'services/notification'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
-import Icon from 'assets/icon.png'
 
 class ShoppingListItem extends React.Component {
   constructor(props) {
@@ -23,19 +23,19 @@ class ShoppingListItem extends React.Component {
       .on('value', (snap) => {
         this.setState({ item: snap.val() })
         if (snap.val() === null) {
-          return this.displayNotification(
+          return displayNotification(
             'Item removed',
             this.state.item.description
           )
         }
         if (snap.val().done && !this.state.item.done) {
-          return this.displayNotification(
+          return displayNotification(
             'Item checked',
             this.state.item.description
           )
         }
         if (!snap.val().done && this.state.item.done) {
-          return this.displayNotification(
+          return displayNotification(
             'Item unchecked',
             this.state.item.description
           )
@@ -46,23 +46,6 @@ class ShoppingListItem extends React.Component {
 
   componentWillUnmount() {
     firebase.off('value', this.firebaseCallback)
-  }
-
-  displayNotification = (title, body) => {
-    if (Notification.permission === 'granted') {
-      navigator.serviceWorker.getRegistration().then((reg) => {
-        const options = {
-          body,
-          icon: Icon,
-          vibrate: [100, 50, 100],
-          data: {
-            dateOfArrival: Date.now(),
-            primaryKey: 1
-          }
-        }
-        reg.showNotification(title, options)
-      })
-    }
   }
 
   toggleDone = () => {
