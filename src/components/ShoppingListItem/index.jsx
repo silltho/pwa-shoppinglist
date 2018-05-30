@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
-import { database } from 'config/firebase'
+import firebase from 'config/firebase'
+import { displayNotification } from 'services/notification'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
-import Icon from 'assets/icon.png'
 
 class ShoppingListItem extends React.Component {
   constructor(props) {
@@ -18,45 +18,45 @@ class ShoppingListItem extends React.Component {
   }
 
   componentDidMount() {
-    this.firebaseCallback = database
+    this.firebaseCallback = firebase
       .child(this.props.itemKey)
       .on('value', (snap) => {
         this.setState({ item: snap.val() })
-        /*if (snap.val() === null) {
+        if (snap.val() === null) {
           return this.displayNotification(
             'Item removed',
             this.state.item.description
           )
         }
         if (snap.val().done && !this.state.item.done) {
-          return this.displayNotification(
+          return displayNotification(
             'Item checked',
             this.state.item.description
           )
         }
         if (!snap.val().done && this.state.item.done) {
-          return this.displayNotification(
+          return displayNotification(
             'Item unchecked',
             this.state.item.description
           )
         }
-        return true*/
+        return true
       })
   }
 
   componentWillUnmount() {
-    database.off('value', this.firebaseCallback)
+    firebase.off('value', this.firebaseCallback)
   }
 
   toggleDone = () => {
-    database.child(this.props.itemKey).update({
+    firebase.child(this.props.itemKey).update({
       description: this.state.item.description,
       done: !this.state.item.done
     })
   }
 
   removeItem = () => {
-    database.child(this.props.itemKey).remove()
+    firebase.child(this.props.itemKey).remove()
   }
 
   render() {

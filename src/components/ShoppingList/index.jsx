@@ -1,7 +1,8 @@
 import React from 'react'
 import ShoppingListItem from 'components/ShoppingListItem'
 import ShoppingListForm from 'components/ShoppingListForm'
-import { database } from 'config/firebase'
+import firebase from 'config/firebase'
+import { displayNotification } from 'services/notification'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 
@@ -15,7 +16,15 @@ class ShoppingList extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.firebaseCallback = database.on('value', (snap) => {
+    this.firebaseCallback = firebase.on('value', (snap) => {
+      const keys = Object.keys(snap.val())
+      const last = snap.val()[keys[keys.length - 1]]
+      if (
+        Object.keys(this.state.shoppingItems).length <
+        Object.keys(snap.val()).length
+      ) {
+        displayNotification('New Item', last.description)
+      }
       this.setState({ shoppingItems: snap.val() })
     })
   }

@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { database } from 'config/firebase'
+import firebase from 'config/firebase'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 import FontAwesome from 'react-fontawesome'
-//import webpush from 'web-push'
-//import VAPID_KEYS from 'config/vapid'
 
 const Wrapper = styled(Grid)`
   margin-top: 1rem !important;
@@ -27,29 +25,9 @@ class ShoppingListForm extends React.Component {
     })
   }
 
-  /*pushNofication = () => {
-    webpush.setGCMAPIKey(332598307602)
-    webpush.setVapidDetails(
-      'mailto:pobermueller.mmt-b2015@fh-salzburg.ac.at',
-      VAPID_KEYS.keys.p256dh,
-      VAPID_KEYS.keys.auth
-    )
-
-    // This is the same output of calling JSON.stringify on a PushSubscription
-    const pushSubscription = {
-      endpoint: 'https://fcm.googleapis.com/fcm/send/',
-      keys: {
-        auth: VAPID_KEYS.keys.auth,
-        p256dh: VAPID_KEYS.keys.p256dh
-      }
-    }
-
-    webpush.sendNotification(pushSubscription, 'Your Push Payload Text')
-  }*/
-
   onFormSubmit = (e) => {
     e.preventDefault()
-    database.push({
+    firebase.push({
       description: this.state.newItemDesc,
       done: false
     })
