@@ -23,7 +23,7 @@ class ShoppingListItem extends React.Component {
       .on('value', (snap) => {
         this.setState({ item: snap.val() })
         if (snap.val() === null) {
-          return this.displayNotification(
+          return displayNotification(
             'Item removed',
             this.state.item.description
           )
